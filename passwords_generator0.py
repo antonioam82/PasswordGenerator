@@ -15,6 +15,7 @@ class app:
         self.your_password = StringVar()
         #self.length=IntVar()
 
+        Label(self.root,text="YOUR PASSWORD").place(x=10,y=20)
         Entry(self.root,textvariable=self.your_password,font=('arial 20'),width=58).place(x=10,y=40)
         Label(self.root,text="LENGTH:").place(x=10,y=100)
         Button(self.root,text="CREATE PASSWORD",width=123,height=2).place(x=12,y=190)
