@@ -8,7 +8,7 @@ class app:
     def __init__(self):
         self.root = Tk()
         self.root.title("CREATE YOU PASSWORD")
-        self.root.geometry("899x320")
+        self.root.geometry("899x290")
         self.numbs = [0,1,2,3,4,5,6,7,8,9,10]
         
 
@@ -18,6 +18,8 @@ class app:
         Label(self.root,text="YOUR PASSWORD").place(x=10,y=20)
         Entry(self.root,textvariable=self.your_password,font=('arial 20'),width=58).place(x=10,y=40)
         Label(self.root,text="LENGTH:").place(x=10,y=100)
+        self.stateLabel = Label(self.root,text="",width=127)
+        self.stateLabel.place(x=2,y=131)
         Button(self.root,text="CREATE PASSWORD",width=123,height=2).place(x=12,y=158)
         Button(self.root,text="SAVE PASSWORD",width=123,height=2).place(x=12,y=208)
         self.len=ttk.Combobox(self.root,width=10)
