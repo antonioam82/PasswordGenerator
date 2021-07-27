@@ -48,8 +48,8 @@ class app:
         characts = string.ascii_letters+string.digits
         self.stateLabel.configure(text="LOOKING FOR YOUR PASSWORD...",fg="red")
         while True:
-            print("on")
             pswrd=("").join(random.choice(characts) for i in range(int(self.len.get())))
+            print(pswrd)
             if(sum(c.islower() for c in pswrd)>=int(self.min_low.get())
                 and sum(c.isupper() for c in pswrd)>=int(self.min_upp.get())
                 and sum(c.isdigit() for c in pswrd)>=int(self.min_num.get())):
