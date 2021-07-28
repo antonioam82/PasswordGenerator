@@ -11,9 +11,12 @@ class app:
         self.root = Tk()
         self.root.title("CREATE YOU PASSWORD")
         self.root.geometry("899x290")
-        self.numbs = [0,1,2,3,4,5,6,7,8,9,10]
+        self.numbs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
+                      25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,
+                      47,48,49,50]
         
         self.your_password = StringVar()
+        #validatecommand = self.root.register(self.valid_entry)
 
         Label(self.root,text="YOUR PASSWORD").place(x=10,y=20)
         Entry(self.root,textvariable=self.your_password,font=('arial 20'),width=58).place(x=10,y=40)
@@ -22,16 +25,16 @@ class app:
         self.stateLabel.place(x=2,y=131)
         Button(self.root,text="CREATE PASSWORD",width=123,height=2,command=self.init_task).place(x=12,y=158)
         Button(self.root,text="SAVE PASSWORD",width=123,height=2).place(x=12,y=208)
-        self.len=ttk.Combobox(self.root,width=10)
+        self.len=ttk.Combobox(self.root,width=10,state="readonly")
         self.len.place(x=68,y=100)
         Label(self.root,text="MIN LOWERCASE:").place(x=210,y=100)
-        self.min_low=ttk.Combobox(self.root,width=10)
+        self.min_low=ttk.Combobox(self.root,width=10,state="readonly")#validatecommand=(validatecommand,"%S"))
         self.min_low.place(x=313,y=100)
         Label(self.root,text="MIN UPPERCASE:").place(x=458,y=100)
-        self.min_upp=ttk.Combobox(self.root,width=10)
+        self.min_upp=ttk.Combobox(self.root,width=10,state="readonly")
         self.min_upp.place(x=560,y=100)
         Label(self.root,text="MIN NUMBERS:").place(x=710,y=100)
-        self.min_num=ttk.Combobox(self.root,width=10)
+        self.min_num=ttk.Combobox(self.root,width=10,state="readonly")
         self.min_num.place(x=802,y=100)
         self.len["values"]=self.numbs
         self.len.set(8)
@@ -56,6 +59,9 @@ class app:
                 break
         self.stateLabel.configure(text="TASK COMPLETED.",fg="blue")
         self.your_password.set(pswrd)
+
+    #def valid_entry(self,char):
+        #return char in "0123456789"
 
     def init_task(self):
         if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) <= int(self.len.get()):
