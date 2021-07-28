@@ -73,7 +73,7 @@ class app:
 
     def init_task(self):
         if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) <= int(self.len.get()):
-            self.btnCreate.configure(text="CANCEL",command=self.cancel_process)
+            self.btnCreate.configure(text="CANCEL PROCESS",command=self.cancel_process)
             t = threading.Thread(target=self.genera_password)
             t.start()
         else:
