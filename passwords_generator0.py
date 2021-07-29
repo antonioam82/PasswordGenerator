@@ -51,14 +51,19 @@ class app:
         self.root.mainloop()
 
     def genera_password(self):
+        p_len = int(self.len.get())
+        min_low = int(self.min_low.get())
+        min_upp = int(self.min_upp.get())
+        min_num = int(self.min_num.get())
+        
         characts = string.ascii_letters+string.digits
         self.stateLabel.configure(text="LOOKING FOR YOUR PASSWORD...",fg="red")
         while self.activated == True:
-            pswrd=("").join(random.choice(characts) for i in range(int(self.len.get())))
+            pswrd=("").join(random.choice(characts) for i in range(p_len))
             print(pswrd)
-            if(sum(c.islower() for c in pswrd)>=int(self.min_low.get())
-                and sum(c.isupper() for c in pswrd)>=int(self.min_upp.get())
-                and sum(c.isdigit() for c in pswrd)>=int(self.min_num.get())):
+            if(sum(c.islower() for c in pswrd)>=min_low
+                and sum(c.isupper() for c in pswrd)>=min_upp
+                and sum(c.isdigit() for c in pswrd)>=min_num):
                 #break
                 self.activated = False
                 
