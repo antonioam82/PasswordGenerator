@@ -18,7 +18,6 @@ class app:
                       47,48,49,50]
         
         self.your_password = StringVar()
-        #validatecommand = self.root.register(self.valid_entry)
 
         Label(self.root,text="YOUR PASSWORD").place(x=10,y=20)
         Entry(self.root,textvariable=self.your_password,font=('arial 20'),width=58).place(x=10,y=40)
@@ -64,6 +63,10 @@ class app:
             characts = string.ascii_uppercase
         elif min_low+min_upp == p_len:
             characts = string.ascii_letters
+        elif min_low+min_num == p_len:
+            characts = string.ascii_lowercase+string.digits
+        elif min_upp+min_num == p_len:
+            characts = string.ascii_uppercase+string.digits
         else:
             characts = string.ascii_letters+string.digits
             
@@ -74,7 +77,6 @@ class app:
             if(sum(c.islower() for c in pswrd)>=min_low
                 and sum(c.isupper() for c in pswrd)>=min_upp
                 and sum(c.isdigit() for c in pswrd)>=min_num):
-                #break
                 self.activated = False
                 
         self.stateLabel.configure(text="TASK COMPLETED.",fg="blue")
