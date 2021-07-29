@@ -62,6 +62,8 @@ class app:
             characts = string.ascii_lowercase
         elif min_upp == p_len:
             characts = string.ascii_uppercase
+        elif min_low+min_upp == p_len:
+            characts = string.ascii_letters
         else:
             characts = string.ascii_letters+string.digits
             
