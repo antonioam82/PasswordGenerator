@@ -56,7 +56,15 @@ class app:
         min_upp = int(self.min_upp.get())
         min_num = int(self.min_num.get())
         
-        characts = string.ascii_letters+string.digits
+        if min_num == p_len:
+            characts = string.digits
+        elif min_low == p_len:
+            characts = string.ascii_lowercase
+        elif min_upp == p_len:
+            characts = string.ascii_uppercase
+        else:
+            characts = string.ascii_letters+string.digits
+            
         self.stateLabel.configure(text="LOOKING FOR YOUR PASSWORD...",fg="red")
         while self.activated == True:
             pswrd=("").join(random.choice(characts) for i in range(p_len))
