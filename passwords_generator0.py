@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import messagebox
+from tkinter import messagebox,filedialog
 from tkinter import ttk
 import string
 import random
@@ -18,6 +18,7 @@ class app:
                       47,48,49,50]
         
         self.your_password = StringVar()
+        #validatecommand = self.root.register(self.valid_entry)
 
         Label(self.root,text="YOUR PASSWORD").place(x=10,y=20)
         Entry(self.root,textvariable=self.your_password,font=('arial 20'),width=58).place(x=10,y=40)
@@ -26,7 +27,7 @@ class app:
         self.stateLabel.place(x=2,y=131)
         self.btnCreate = Button(self.root,text="CREATE PASSWORD",width=123,height=2,command=self.init_task)
         self.btnCreate.place(x=12,y=158)
-        Button(self.root,text="SAVE PASSWORD",width=123,height=2).place(x=12,y=208)
+        Button(self.root,text="SAVE PASSWORD",width=123,height=2,command=self.save_password).place(x=12,y=208)
         self.len=ttk.Combobox(self.root,width=10,state="readonly")
         self.len.place(x=68,y=100)
         Label(self.root,text="MIN LOWERCASE:").place(x=210,y=100)
@@ -77,13 +78,24 @@ class app:
             if(sum(c.islower() for c in pswrd)>=min_low
                 and sum(c.isupper() for c in pswrd)>=min_upp
                 and sum(c.isdigit() for c in pswrd)>=min_num):
+                #break
                 self.activated = False
                 
-        self.stateLabel.configure(text="TASK COMPLETED.",fg="blue")
+        self.stateLabel.configure(text="TASK COMPLETED.",fg="blue")     
         if self.activated == False:
             self.btnCreate.configure(text="CREATE PASSWORD",command=self.init_task)
         self.your_password.set(pswrd)
         self.activated = True
+
+    def save_password(self):
+        if len(self.your_password.get())>0:
+            doc = filedialog.asksaveasfilename(initialdir="/",
+                  title="Save as",defaultextension='.txt')
+            if doc != "":
+                document = open(doc,"w",encoding="utf-8")
+                document.write(str(self.your_password.get()))
+                document.close()
+                messagebox.showinfo("SAVED","Saved password")
 
     def cancel_process(self):
         self.activated = False
