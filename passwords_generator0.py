@@ -10,7 +10,7 @@ import time
 class app:
     def __init__(self):
         self.root = Tk()
-        self.root.title("CREATE YOU PASSWORD")
+        self.root.title("PASSWORD GENERATOR")
         self.activated = True
         self.root.geometry("899x290")
         self.numbs = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
@@ -18,7 +18,7 @@ class app:
                       47,48,49,50]
         
         self.your_password = StringVar()
-        
+
         Label(self.root,text="YOUR PASSWORD").place(x=10,y=20)
         Entry(self.root,textvariable=self.your_password,font=('arial 20'),width=58).place(x=10,y=40)
         Label(self.root,text="LENGTH:").place(x=10,y=100)
