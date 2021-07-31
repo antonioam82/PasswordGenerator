@@ -21,7 +21,6 @@ class app:
         self.your_password = StringVar()
         self.currentDir = StringVar()
         self.currentDir.set(os.getcwd())
-        #validatecommand = self.root.register(self.valid_entry)
 
         Entry(self.root,textvariable=self.currentDir,width=149).place(x=0,y=0)
         Label(self.root,text="YOUR PASSWORD").place(x=10,y=30)
@@ -35,7 +34,7 @@ class app:
         self.len=ttk.Combobox(self.root,width=10,state="readonly")
         self.len.place(x=68,y=110)
         Label(self.root,text="MIN LOWERCASE:").place(x=210,y=110)
-        self.min_low=ttk.Combobox(self.root,width=10,state="readonly")#validatecommand=(validatecommand,"%S"))
+        self.min_low=ttk.Combobox(self.root,width=10,state="readonly")
         self.min_low.place(x=313,y=110)
         Label(self.root,text="MIN UPPERCASE:").place(x=458,y=110)
         self.min_upp=ttk.Combobox(self.root,width=10,state="readonly")
@@ -99,7 +98,7 @@ class app:
                 document = open(doc,"w",encoding="utf-8")
                 document.write(str(self.your_password.get()))
                 document.close()
-                messagebox.showinfo("SAVED","Saved password")
+                messagebox.showinfo("SAVED","Password saved correctly.")
 
     def cancel_process(self):
         self.activated = False
@@ -110,7 +109,7 @@ class app:
             t = threading.Thread(target=self.genera_password)
             t.start()
         else:
-            messagebox.showwarning("ERROR","INVALID LENGHT")
+            messagebox.showwarning("ERROR","INVALID LENGHT.")
 
 if __name__=="__main__":
     app()
