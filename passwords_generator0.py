@@ -4,6 +4,7 @@ from tkinter import ttk
 import string
 import random
 import threading
+import os
 import sys
 import time
 
@@ -18,26 +19,30 @@ class app:
                       47,48,49,50]
         
         self.your_password = StringVar()
+        self.currentDir = StringVar()
+        self.currentDir.set(os.getcwd())
+        #validatecommand = self.root.register(self.valid_entry)
 
-        Label(self.root,text="YOUR PASSWORD").place(x=10,y=20)
-        Entry(self.root,textvariable=self.your_password,font=('arial 20'),width=58).place(x=10,y=40)
-        Label(self.root,text="LENGTH:").place(x=10,y=100)
+        Entry(self.root,textvariable=self.currentDir,width=149).place(x=0,y=0)
+        Label(self.root,text="YOUR PASSWORD").place(x=10,y=30)
+        Entry(self.root,textvariable=self.your_password,font=('arial 20'),width=58).place(x=10,y=50)
+        Label(self.root,text="LENGTH:").place(x=10,y=110)
         self.stateLabel = Label(self.root,text="",width=127)
-        self.stateLabel.place(x=2,y=131)
+        self.stateLabel.place(x=2,y=141)
         self.btnCreate = Button(self.root,text="CREATE PASSWORD",width=123,height=2,bg="gray86",command=self.init_task)
-        self.btnCreate.place(x=12,y=158)
-        Button(self.root,text="SAVE PASSWORD",width=123,height=2,bg="gray86",command=self.save_password).place(x=12,y=208)
+        self.btnCreate.place(x=12,y=168)
+        Button(self.root,text="SAVE PASSWORD",width=123,height=2,bg="gray86",command=self.save_password).place(x=12,y=218)
         self.len=ttk.Combobox(self.root,width=10,state="readonly")
-        self.len.place(x=68,y=100)
-        Label(self.root,text="MIN LOWERCASE:").place(x=210,y=100)
-        self.min_low=ttk.Combobox(self.root,width=10,state="readonly")
-        self.min_low.place(x=313,y=100)
-        Label(self.root,text="MIN UPPERCASE:").place(x=458,y=100)
+        self.len.place(x=68,y=110)
+        Label(self.root,text="MIN LOWERCASE:").place(x=210,y=110)
+        self.min_low=ttk.Combobox(self.root,width=10,state="readonly")#validatecommand=(validatecommand,"%S"))
+        self.min_low.place(x=313,y=110)
+        Label(self.root,text="MIN UPPERCASE:").place(x=458,y=110)
         self.min_upp=ttk.Combobox(self.root,width=10,state="readonly")
-        self.min_upp.place(x=560,y=100)
-        Label(self.root,text="MIN NUMBERS:").place(x=710,y=100)
+        self.min_upp.place(x=560,y=110)
+        Label(self.root,text="MIN NUMBERS:").place(x=710,y=110)
         self.min_num=ttk.Combobox(self.root,width=10,state="readonly")
-        self.min_num.place(x=802,y=100)
+        self.min_num.place(x=802,y=110)
         self.len["values"]=self.numbs
         self.len.set(8)
         self.min_low["values"]=self.numbs
