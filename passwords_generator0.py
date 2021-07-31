@@ -81,7 +81,6 @@ class app:
             if(sum(c.islower() for c in pswrd)>=min_low
                 and sum(c.isupper() for c in pswrd)>=min_upp
                 and sum(c.isdigit() for c in pswrd)>=min_num):
-                #break
                 self.activated = False
                 
         self.stateLabel.configure(text="TASK COMPLETED.",fg="blue")     
@@ -105,7 +104,7 @@ class app:
 
     def init_task(self):
         if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) <= int(self.len.get()):
-            self.btnCreate.configure(text="CANCEL PROCESS",command=self.cancel_process)
+            self.btnCreate.configure(text="CANCEL SEARCH",command=self.cancel_process)
             t = threading.Thread(target=self.genera_password)
             t.start()
         else:
