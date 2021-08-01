@@ -34,18 +34,18 @@ class app:
         Button(self.root,text="SAVE PASSWORD",width=123,height=2,bg="gray86",command=self.save_password).place(x=12,y=218)
         self.len=ttk.Combobox(self.root,width=5,state="readonly")
         self.len.place(x=68,y=110)
-        Label(self.root,text="MIN LOWERCASE:").place(x=138,y=110)
+        Label(self.root,text="MIN LOWERCASE:").place(x=148,y=110)
         self.min_low=ttk.Combobox(self.root,width=5,state="readonly")
-        self.min_low.place(x=245,y=110)
-        Label(self.root,text="MIN UPPERCASE:").place(x=318,y=110)
+        self.min_low.place(x=255,y=110)
+        Label(self.root,text="MIN UPPERCASE:").place(x=338,y=110)
         self.min_upp=ttk.Combobox(self.root,width=5,state="readonly")
-        self.min_upp.place(x=420,y=110)
-        Label(self.root,text="MIN NUMBERS:").place(x=490,y=110)
+        self.min_upp.place(x=438,y=110)
+        Label(self.root,text="MIN NUMBERS:").place(x=520,y=110)
         self.min_num=ttk.Combobox(self.root,width=5,state="readonly")
-        self.min_num.place(x=585,y=110)
-        Label(self.root,text="MIN SPECIAL CHARS:").place(x=660,y=110)
+        self.min_num.place(x=615,y=110)
+        Label(self.root,text="MIN SPECIAL CHARS:").place(x=700,y=110)
         self.min_char=ttk.Combobox(self.root,width=5,state="readonly")
-        self.min_char.place(x=790,y=110)
+        self.min_char.place(x=831,y=110)
         self.len["values"]=self.numbs
         self.len.set(8)
         self.min_low["values"]=self.numbs
@@ -120,7 +120,7 @@ class app:
         self.activated = False
 
     def init_task(self):
-        if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) <= int(self.len.get()):
+        if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) + int(self.min_char.get()) <= int(self.len.get()):
             self.btnCreate.configure(text="CANCEL SEARCH",command=self.cancel_process)
             t = threading.Thread(target=self.genera_password)
             t.start()
