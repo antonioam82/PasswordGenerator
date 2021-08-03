@@ -70,8 +70,6 @@ class app:
             characts = string.digits
         elif min_chars == p_len:
             characts = self.special_chars
-
-            
         elif min_low == p_len:
             characts = string.ascii_lowercase
         elif min_upp == p_len:
