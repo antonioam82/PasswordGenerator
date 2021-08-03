@@ -21,7 +21,7 @@ class app:
         self.your_password = StringVar()
         self.currentDir = StringVar()
         self.currentDir.set(os.getcwd())
-        self.special_chars = "@#$%&?+*-_{}><~¬()=^[]|!:;,.\/"
+        self.special_chars = "@#$%&?+*-_{}><~¬()=^[]|!:;,.\/€"
 
         Entry(self.root,textvariable=self.currentDir,width=149).place(x=0,y=0)
         Label(self.root,text="YOUR PASSWORD").place(x=10,y=30)
@@ -65,7 +65,7 @@ class app:
         min_upp = int(self.min_upp.get())
         min_num = int(self.min_num.get())
         min_chars = int(self.min_char.get())
-        
+
         if min_num == p_len:
             characts = string.digits
         elif min_chars == p_len:
@@ -85,7 +85,7 @@ class app:
         elif min_chars + min_upp == p_len:
             characts = string.ascii_uppercase+self.special_chars
         elif min_chars + min_upp + min_low == p_len:
-            characts = string.ascii_letters+self.special_chars            
+            characts = string.ascii_letters+self.special_chars           
         else:
             characts = string.ascii_letters+string.digits+self.special_chars
             
