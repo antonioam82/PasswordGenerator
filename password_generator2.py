@@ -92,7 +92,7 @@ class app:
         self.stateLabel.configure(text="LOOKING FOR YOUR PASSWORD...",fg="red")
         while self.activated == True:
             pswrd=("").join(random.choice(characts) for i in range(p_len))
-            self.your_password.set(pswrd)
+            print(pswrd)
             if(sum(c.islower() for c in pswrd)>=min_low
                 and sum(c.isupper() for c in pswrd)>=min_upp
                 and sum(c.isdigit() for c in pswrd)>=min_num
