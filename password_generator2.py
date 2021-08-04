@@ -4,6 +4,7 @@ from tkinter import ttk
 import string
 import random
 import threading
+import pyperclip
 import os
 import sys
 import time
@@ -31,7 +32,8 @@ class app:
         self.stateLabel.place(x=2,y=141)
         self.btnCreate = Button(self.root,text="CREATE PASSWORD",width=123,height=2,bg="gray86",command=self.init_task)
         self.btnCreate.place(x=12,y=168)
-        Button(self.root,text="SAVE PASSWORD",width=123,height=2,bg="gray86",command=self.save_password).place(x=12,y=218)
+        Button(self.root,text="SAVE PASSWORD",width=60,height=2,bg="gray86",command=self.save_password).place(x=12,y=218)
+        Button(self.root,text="COPY",width=60,height=2,bg="gray86",command=self.copy).place(x=453,y=218)
         self.len=ttk.Combobox(self.root,width=5,state="readonly")
         self.len.place(x=68,y=110)
         Label(self.root,text="MIN LOWERCASE:").place(x=148,y=110)
@@ -104,6 +106,12 @@ class app:
             self.btnCreate.configure(text="CREATE PASSWORD",command=self.init_task)
         self.your_password.set(pswrd)
         self.activated = True
+
+    def copy(self):
+        if self.your_password.get() != "":
+            pyperclip.copy(self.your_password.get())
+            messagebox.showinfo("COPIED","Copied to clipboard.")
+    
 
     def save_password(self):
         if len(self.your_password.get())>0:
