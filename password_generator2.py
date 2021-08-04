@@ -22,6 +22,7 @@ class app:
         self.your_password = StringVar()
         self.currentDir = StringVar()
         self.currentDir.set(os.getcwd())
+        self.running = False
         self.special_chars = "@#$%&?+*-_{}><~¬()=^[]|!:;,.\/€"
 
         Entry(self.root,textvariable=self.currentDir,width=149).place(x=0,y=0)
@@ -100,6 +101,7 @@ class app:
                 and sum(c.isdigit() for c in pswrd)>=min_num
                 and sum(c in self.special_chars for c in pswrd)>=min_chars):
                 self.activated = False
+                self.running = False
                 
         self.stateLabel.configure(text="TASK COMPLETED.",fg="blue")     
         if self.activated == False:
@@ -108,13 +110,13 @@ class app:
         self.activated = True
 
     def copy(self):
-        if self.your_password.get() != "":
+        if self.your_password.get() != "" and self.running == False:
             pyperclip.copy(self.your_password.get())
             messagebox.showinfo("COPIED","Copied to clipboard.")
     
 
     def save_password(self):
-        if len(self.your_password.get())>0:
+        if len(self.your_password.get())>0 and self.running == False:
             doc = filedialog.asksaveasfilename(initialdir="/",
                   title="Save as",defaultextension='.txt')
             if doc != "":
@@ -125,8 +127,10 @@ class app:
 
     def cancel_process(self):
         self.activated = False
+        self.running = False
 
     def init_task(self):
+        self.running = True
         if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) + int(self.min_char.get()) <= int(self.len.get()):
             self.btnCreate.configure(text="CANCEL SEARCH",command=self.cancel_process)
             t = threading.Thread(target=self.genera_password)
