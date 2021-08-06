@@ -108,6 +108,7 @@ class app:
 
     def cancel_process(self):
         self.activated = False
+        messagebox.showinfo("CANCELED","Process canceled.")
 
     def init_task(self):
         if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) <= int(self.len.get()):
