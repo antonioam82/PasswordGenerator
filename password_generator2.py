@@ -114,7 +114,6 @@ class app:
             pyperclip.copy(self.your_password.get())
             messagebox.showinfo("COPIED","Copied to clipboard.")
     
-
     def save_password(self):
         if len(self.your_password.get())>0 and self.running == False:
             doc = filedialog.asksaveasfilename(initialdir="/",
