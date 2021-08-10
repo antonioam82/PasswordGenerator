@@ -88,7 +88,9 @@ class app:
         elif min_chars + min_upp == p_len:
             characts = string.ascii_uppercase+self.special_chars
         elif min_chars + min_upp + min_low == p_len:
-            characts = string.ascii_letters+self.special_chars           
+            characts = string.ascii_letters+self.special_chars
+        elif min_chars + min_upp + min_num == p_len:
+            characts = string.ascii_uppercase+self.special_chars+string.digits
         else:
             characts = string.ascii_letters+string.digits+self.special_chars
             
