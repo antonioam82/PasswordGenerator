@@ -69,7 +69,21 @@ class app:
         min_num = int(self.min_num.get())
         min_chars = int(self.min_char.get())
 
-        if min_num == p_len:
+        characts = ''
+        pos = 0
+        liats = [string.digits,string.ascii_lowercase,string.ascii_uppercase,self.special_chars]
+        sumas = [min_num,min_low,min_upp,min_chars]
+        s = sum(sumas)
+        if s == p_len and 0 in sumas:
+            for i in sumas:
+                if i != 0:
+                    characts = characts+liats[pos]
+                    print(characts)
+                pos+=1
+        else:
+            characts = string.ascii_letters+string.digits+self.special_chars
+            
+        '''if min_num == p_len:
             characts = string.digits
         elif min_chars == p_len:
             characts = self.special_chars
@@ -92,7 +106,7 @@ class app:
         elif min_chars + min_upp + min_num == p_len:
             characts = string.ascii_uppercase+self.special_chars+string.digits
         else:
-            characts = string.ascii_letters+string.digits+self.special_chars
+            characts = string.ascii_letters+string.digits+self.special_chars'''
             
         self.stateLabel.configure(text="LOOKING FOR YOUR PASSWORD...",fg="red")
         while self.activated == True:
@@ -116,6 +130,7 @@ class app:
             pyperclip.copy(self.your_password.get())
             messagebox.showinfo("COPIED","Copied to clipboard.")
     
+
     def save_password(self):
         if len(self.your_password.get())>0 and self.running == False:
             doc = filedialog.asksaveasfilename(initialdir="/",
