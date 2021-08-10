@@ -23,7 +23,7 @@ class app:
         self.currentDir = StringVar()
         self.currentDir.set(os.getcwd())
         self.running = False
-        self.special_chars = "@#$%&?+*-_{}><~¬()=^[]|!:;,.\/€"
+        self.special_chars = "#$%&\'()*+,-./:;<=>?@[\\]^_`{|}¬~€!"#@#$%&?+*-_{}><~¬()=^[]|!:;,.\/€"
 
         Entry(self.root,textvariable=self.currentDir,width=149).place(x=0,y=0)
         Label(self.root,text="YOUR PASSWORD").place(x=10,y=30)
