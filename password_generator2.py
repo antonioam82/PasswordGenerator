@@ -23,7 +23,7 @@ class app:
         self.currentDir = StringVar()
         self.currentDir.set(os.getcwd())
         self.running = False
-        self.special_chars = "#$%&\'()*+,-./:;<=>?@[\\]^_`{|}¬~€!"#@#$%&?+*-_{}><~¬()=^[]|!:;,.\/€"
+        self.special_chars = "#$%&\'()*+,-./:;<=>?@[\\]^_`{|}¬~€!ñÑ"#@#$%&?+*-_{}><~¬()=^[]|!:;,.\/€"
 
         Entry(self.root,textvariable=self.currentDir,width=149).place(x=0,y=0)
         Label(self.root,text="YOUR PASSWORD").place(x=10,y=30)
@@ -82,31 +82,6 @@ class app:
                 pos+=1
         else:
             characts = string.ascii_letters+string.digits+self.special_chars
-            
-        '''if min_num == p_len:
-            characts = string.digits
-        elif min_chars == p_len:
-            characts = self.special_chars
-        elif min_low == p_len:
-            characts = string.ascii_lowercase
-        elif min_upp == p_len:
-            characts = string.ascii_uppercase
-        elif min_low+min_upp == p_len:
-            characts = string.ascii_letters
-        elif min_low+min_num == p_len:
-            characts = string.ascii_lowercase+string.digits
-        elif min_upp+min_num == p_len:
-            characts = string.ascii_uppercase+string.digits
-        elif min_chars + min_low == p_len:
-            characts = string.ascii_lowercase+self.special_chars
-        elif min_chars + min_upp == p_len:
-            characts = string.ascii_uppercase+self.special_chars
-        elif min_chars + min_upp + min_low == p_len:
-            characts = string.ascii_letters+self.special_chars
-        elif min_chars + min_upp + min_num == p_len:
-            characts = string.ascii_uppercase+self.special_chars+string.digits
-        else:
-            characts = string.ascii_letters+string.digits+self.special_chars'''
             
         self.stateLabel.configure(text="LOOKING FOR YOUR PASSWORD...",fg="red")
         while self.activated == True:
