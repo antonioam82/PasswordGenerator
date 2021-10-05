@@ -104,8 +104,7 @@ class app:
         if self.your_password.get() != "" and self.running == False:
             pyperclip.copy(self.your_password.get())
             messagebox.showinfo("COPIED","Copied to clipboard.")
-    
-
+            
     def save_password(self):
         if len(self.your_password.get())>0 and self.running == False:
             doc = filedialog.asksaveasfilename(initialdir="/",
@@ -124,7 +123,7 @@ class app:
     def init_task(self):
         self.running = True
         if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) + int(self.min_char.get()) <= int(self.len.get()):
-            self.btnCreate.configure(text="CANCEL SEARCH",command=self.cancel_process)
+            self.btnCreate.configure(text="CANCEL PROCESS",command=self.cancel_process)
             t = threading.Thread(target=self.genera_password)
             t.start()
         else:
