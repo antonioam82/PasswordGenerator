@@ -112,7 +112,7 @@ class app:
             
     def save_password(self):
         if len(self.your_password.get())>0 and self.running == False:
-            question = messagebox.askquestion("ARE YOU SURE?",'''Saving password in plain texts is not a recomended practice.
+            question = messagebox.askquestion("ARE YOU SURE?",'''Saving password in plain texts is not a recommended practice.
 Anyway, do you want to continue?''')
             if question == "yes":
                 doc = filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension='.txt')
