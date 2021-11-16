@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from tkinter import *
 from locale import getdefaultlocale
 from tkinter import messagebox,filedialog
@@ -8,7 +10,7 @@ import threading
 import pyperclip
 import os
 import sys
-#import time
+import time
 
 class app:
     def __init__(self):
@@ -38,7 +40,7 @@ class app:
         self.stateLabel.place(x=2,y=141)
         self.btnCreate = Button(self.root,text="CREATE PASSWORD",width=123,height=2,bg="gray86",command=self.init_task)
         self.btnCreate.place(x=12,y=168)
-        Button(self.root,text="SAVE PASSWORD",width=60,height=2,bg="gray86",command=self.save_password).place(x=12,y=218)
+        Button(self.root,text="GENERATE HASH",width=60,height=2,bg="gray86",command=self.save_password).place(x=12,y=218)
         Button(self.root,text="COPY",width=60,height=2,bg="gray86",command=self.copy).place(x=453,y=218)
         self.len=ttk.Combobox(self.root,width=5,state="readonly")
         self.len.place(x=68,y=110)
@@ -68,14 +70,12 @@ class app:
         self.root.mainloop()
 
     def genera_password(self):
-        #DEFINICIÓN DE LONGITUDES
         p_len = int(self.len.get())
         min_low = int(self.min_low.get())
         min_upp = int(self.min_upp.get())
         min_num = int(self.min_num.get())
         min_chars = int(self.min_char.get())
 
-        #CARACTERES A USAR.
         characts = ''
         pos = 0
         liats = [string.digits,string.ascii_lowercase,string.ascii_uppercase,self.special_chars]
@@ -89,8 +89,7 @@ class app:
                 pos+=1
         else:
             characts = string.ascii_letters+string.digits+self.special_chars
-
-        #BUSQUEDA/GENERACIÓN DE CONTRASEÑA
+            
         self.stateLabel.configure(text="LOOKING FOR YOUR PASSWORD...",fg="red")
         while self.activated == True:
             pswrd=("").join(random.choice(characts) for i in range(p_len))
@@ -101,8 +100,7 @@ class app:
                 and sum(c in self.special_chars for c in pswrd)>=min_chars):
                 self.activated = False
                 self.running = False
-
-        #FIN DE TAREA       
+                
         self.stateLabel.configure(text="TASK COMPLETED.",fg="blue")     
         if self.activated == False:
             self.btnCreate.configure(text="CREATE PASSWORD",command=self.init_task)
@@ -116,24 +114,23 @@ class app:
             
     def save_password(self):
         if len(self.your_password.get())>0 and self.running == False:
-            question = messagebox.askquestion("ARE YOU SURE?",'''Saving password in plain texts is not a recommended practice.
-Anyway, do you want to continue?''')
-            if question == "yes":
-                doc = filedialog.asksaveasfilename(initialdir="/",title="Save as",defaultextension='.txt')
-                if doc != "":
-                    document = open(doc,"w",encoding="utf-8")
-                    document.write(str(self.your_password.get()))
-                    document.close()
-                    messagebox.showinfo("SAVED","Password saved correctly.")
+            doc = filedialog.asksaveasfilename(initialdir="/",
+                  title="Save as",initialfile="password",defaultextension='.txt')
+            if doc != "":
+                document = open(doc,"w",encoding="utf-8")
+                h = hashlib.sha256(bytes(self.your_password.get(),"utf-8")).digest()
+                document.write(str(h))
+                document.close()
+                messagebox.showinfo("CREATED","Hash generated correctly.")
 
     def cancel_process(self):
         self.activated = False
         self.running = False
-        messagebox.showinfo("CANCELLED","Process cancelled.")
+        messagebox.showinfo("CANCELED","Process canceled.")
 
     def init_task(self):
         self.running = True
-        if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) + int(self.min_char.get())<= int(self.len.get()):
+        if int(self.min_low.get()) + int(self.min_upp.get()) + int(self.min_num.get()) + int(self.min_char.get()) <= int(self.len.get()):
             self.btnCreate.configure(text="CANCEL PROCESS",command=self.cancel_process)
             t = threading.Thread(target=self.genera_password)
             t.start()
