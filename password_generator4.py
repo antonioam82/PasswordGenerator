@@ -26,6 +26,7 @@ class app:
         self.currentDir = tk.StringVar()
         self.currentDir.set(os.getcwd())
         self.running = False
+        self.interrupted = False
         lang = getdefaultlocale()[0]
 
         if 'es_' in lang:
@@ -70,7 +71,17 @@ class app:
         self.min_char["values"]=self.numbs
         self.min_char.set(0)
 
+        #self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
+
         self.root.mainloop()
+
+    '''def on_closing(self):
+        self.stop_program()
+        self.root.destroy()'''
+
+    '''def stop_program(self):
+        self.activated = False
+        self.running = False'''
 
     def genera_password(self):
         #DEFINICIÓN DE LONGITUDES
@@ -99,7 +110,7 @@ class app:
             characts = self.lower_characts+self.upper_characts+digits+special_chars
 
         #BUSQUEDA/GENERACIÓN DE CONTRASEÑA
-        self.stateLabel.configure(text="LOOKING FOR YOUR PASSWORD...",fg="red")
+        self.stateLabel.configure(text="LOOKING FOR YOUR PASSWORD...",fg="green")
         while self.activated == True:
             pswrd=("").join(random.choice(characts) for i in range(p_len))
             self.your_password.set(pswrd)
@@ -110,12 +121,16 @@ class app:
                 self.activated = False
                 self.running = False
 
-        #FIN DE TAREA       
-        self.stateLabel.configure(text="TASK COMPLETED.",fg="blue")     
+        #FIN DE TAREA
+        if self.interrupted:
+            self.stateLabel.configure(text="PROCESS CANCELLED BY USER",fg="red")
+        else:
+            self.stateLabel.configure(text="TASK COMPLETED.",fg="blue")     
         if self.activated == False:
             self.btnCreate.configure(text="CREATE PASSWORD",command=self.init_task)
         self.your_password.set(pswrd)
         self.activated = True
+        self.interrupted = False
 
     def copy(self):
         if self.your_password.get() != "" and self.running == False:
@@ -123,7 +138,7 @@ class app:
             messagebox.showinfo("COPIED","Copied to clipboard.")
             
     def save_password(self):
-        if len(self.your_password.get())>0 and self.running == False:
+        if len(self.your_password.get())> 0 and self.running == False:
             question = messagebox.askquestion("ARE YOU SURE?",'''Saving password in plain texts is not a recommended practice.
 Anyway, do you want to continue?''')
             if question == "yes":
@@ -137,6 +152,7 @@ Anyway, do you want to continue?''')
     def cancel_process(self):
         self.activated = False
         self.running = False
+        self.interrupted = True
         messagebox.showinfo("CANCELLED","Process cancelled.")
 
     def init_task(self):
